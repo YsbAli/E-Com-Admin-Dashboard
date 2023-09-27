@@ -4,15 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Components/Footer";
 import SignUp from "./Components/Signup";
 import PrivateComponent from "./Components/PrivateComponent";
+import Login from "./pages/Login";
 
 function App() {
-
   return (
     <div className="app">
       <BrowserRouter>
         <Navbar />
         {/* <h1>E-Commerce Dashboard</h1> */}
-
 
         <Routes>
           <Route element={<PrivateComponent />}>
@@ -30,6 +29,7 @@ function App() {
           </Route>
 
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
       <Footer />
