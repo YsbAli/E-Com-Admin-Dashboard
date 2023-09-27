@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
+
 const Navbar = () => {
   //if user login or there is usersdata in localstorage then hide the signUp pages
   const isAuth = localStorage.getItem("usersdata");
