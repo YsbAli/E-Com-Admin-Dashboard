@@ -26,14 +26,30 @@ router.get("/", async (req, resp) => {
 // router.patch("/:id", CrudController(User).Update)
 // router.delete("/:id", CrudController(User).Delete)
 
+// router.post('/', async (req, resp) => {
+//     try {
+//         const user = await User.create(req.body)
+//         return resp.send(user)
+//     } catch (err) {
+//         return resp.status(500).send({ message: err.message })
+//     }
+// })
+
+
+
+// for  removing the password field
 router.post('/', async (req, resp) => {
     try {
         const user = await User.create(req.body)
-        return resp.send(user)
+        let result = await user.save()
+        result = result.toObject()
+        delete result.password
+        return resp.send(result)
     } catch (err) {
         return resp.status(500).send({ message: err.message })
     }
 })
+
 
 router.patch("/:id", async (req, resp) => {
     try {
