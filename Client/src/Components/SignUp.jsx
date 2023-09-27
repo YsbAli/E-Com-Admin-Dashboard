@@ -13,7 +13,7 @@ const SignUp = () => {
     if (isAuth) {
       navigate("/");
     }
-  });
+  },[]);
 
   const HandleCollectData = async () => {
     console.log(name, email, password);

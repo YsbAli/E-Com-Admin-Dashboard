@@ -29,7 +29,8 @@ const Navbar = () => {
         <li>
           <Link to="/profile">Profile</Link>
         </li>
-        <li>
+
+        {/* <li>
           {isAuth ? (
             <Link onClick={Logout} to="/signup">
               Logout
@@ -37,10 +38,33 @@ const Navbar = () => {
           ) : (
             <Link to="/signup">SignUp</Link>
           )}
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
+        </li> */}
+
+        {/* {
+          isAuth ? <li><Link onClick={Logout} to="/signup"> Logout</Link> <li> :  <>
+          <li> <Link to="/signup">SignUp</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          </>
+
+        }    */}
+        {/* <Link to="/login">Login</Link> */}
+
+        {isAuth ? (
+          <li>
+            <Link onClick={Logout} to="/signup">
+              LogOut
+            </Link>
+          </li>
+        ) : (
+          <>
+            <li>
+              <Link to="/signup">SignUp</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

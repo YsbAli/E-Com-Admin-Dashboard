@@ -1,12 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../Components/Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const HandleLogin = () => {
+  const navigate = useNavigate();
+
+  // this is for removing login button
+  useEffect(() => {
+    const isAuth = localStorage.getItem("usersdata");
+    if (isAuth) {
+      navigate("/");
+    }
+  }, []);
+
+  const HandleLogin = async () => {
     console.log(email, password);
+
+    const result = await fetch("http://localhost:5002/login", {
+      method: "post",
+      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const data = await result.json();
+    console.log(data);
+
+    if (data.name) {
+      localStorage.setItem("usersdata", JSON.stringify(data));
+      alert("Successfully logged in");
+      navigate("/");
+    } else {
+      alert("Wrong email or password");
+    }
   };
 
   return (
