@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -7,6 +6,7 @@ import SignUp from "./Components/Signup";
 import PrivateComponent from "./Components/PrivateComponent";
 
 function App() {
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -28,7 +28,6 @@ function App() {
             <Route path="/logout" element={<h1>Logout Components</h1>} />
             <Route path="/profile" element={<h1>Profile Components</h1>} />
           </Route>
-
 
           <Route path="/signup" element={<SignUp />} />
         </Routes>
