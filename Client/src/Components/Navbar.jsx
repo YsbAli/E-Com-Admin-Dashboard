@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const Logout = () => {
+    confirm("Are you sure?")
     localStorage.clear();
     toast.warning("Your are logged out !", {
       position: toast.POSITION.TOP_CENTER,

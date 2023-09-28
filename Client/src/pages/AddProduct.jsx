@@ -7,12 +7,21 @@ function AddProduct() {
   const [category, setCategory] = useState();
   const [company, setComapy] = useState();
 
+  const [error, setError] = useState(false);
   //
   const AddProduct = async (e) => {
     e.preventDefault();
     // console.log(title, price, category, company);
-    const user_id = JSON.parse(localStorage.getItem("usersdata"))._id
+
+    // !title ----> if data present then false otherwise true,,,, empty input ---> true,,, so   "!title" refers false
+    if (!title || !price || !category || !company) {
+      setError(true);
+      return false;
+    }
+
+    // const user_id = JSON.parse(localStorage.getItem("usersdata"))._id                                  //getting the user_id from localstorage
     // console.log(user_id)
+
     const product = await fetch("http://localhost:5002/addproducts", {
       method: "post",
       body: JSON.stringify({ title, price, category, company }),
@@ -22,13 +31,14 @@ function AddProduct() {
     });
     const productdata = await product.json();
     console.log(productdata);
-    setTitle(""); 
-    setPrice("");
-    setCategory("");
-    setComapy("");
+
     toast.success("Product Added...", {
       position: toast.POSITION.TOP_CENTER,
     });
+    setTitle("");
+    setPrice("");
+    setCategory("");
+    setComapy("");
   };
 
   return (
@@ -41,6 +51,10 @@ function AddProduct() {
         value={title}
         placeholder="Enter Product title"
       />
+
+      {error && !title && (
+        <span className="input-invallid">Enter valid title</span>
+      )}
       <input
         onChange={(e) => setPrice(e.target.value)}
         className="input-box"
@@ -48,6 +62,10 @@ function AddProduct() {
         value={price}
         placeholder="Enter Product Price"
       />
+      {error && !price && (
+        <span className="input-invallid">Enter valid Price</span>
+      )}
+
       <input
         onChange={(e) => setCategory(e.target.value)}
         className="input-box"
@@ -55,6 +73,10 @@ function AddProduct() {
         value={category}
         placeholder="Enter Product Category"
       />
+      {error && !category && (
+        <span className="input-invallid">Enter valid Category</span>
+      )}
+
       <input
         onChange={(e) => setComapy(e.target.value)}
         className="input-box"
@@ -62,6 +84,10 @@ function AddProduct() {
         value={company}
         placeholder="Enter Product Company"
       />
+      {error && !company && (
+        <span className="input-invallid">Enter valid Company</span>
+      )}
+
       <button onClick={AddProduct} className="btn">
         ADD Product
       </button>
