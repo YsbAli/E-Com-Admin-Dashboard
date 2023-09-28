@@ -16,7 +16,7 @@ const User = require("./models/user.model")
 
 app.use('/register', UserController)
 
-app.use('/products', productController)
+app.use('/', productController)
 
 // app.post("/login", async (req, resp) => {
 //     const user = await User.findOne(req.body).select("-password")              //select("- password") is for not show password

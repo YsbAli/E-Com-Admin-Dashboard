@@ -13,20 +13,28 @@ const CrudController = require('./crud.controller')
 app.use(express.json())
 
 
-router.get("/", async (req, resp) => {
+router.get("/all-Products", async (req, resp) => {
     try {
         const product = await Product.find().lean().exec()
-        return resp.send(product)
+        // return resp.send(product)
+
+        if (product.length >= 0) {
+            return resp.send(product)
+        }
+        else {
+            return resp.send({ Message: "No Product Found!" })
+        }
+
     } catch (err) {
         return resp.status(500).send({ message: err.message })
     }
 })
 
 
-router.patch("/:id", CrudController(Product).Update)
+// router.patch("/:id", CrudController(Product).Update)
 // router.delete("/:id", CrudController(Product).Delete)
 
-router.post('/', async (req, resp) => {
+router.post('/add-Product', async (req, resp) => {
     try {
         const product = await Product.create(req.body)
         return resp.send(product)
