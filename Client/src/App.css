@@ -1,4 +1,4 @@
-.main{
+.main {
   margin-left: 40%;
   background-color: teal;
   width: 23rem;
@@ -49,8 +49,6 @@ h1 {
   bottom: 0;
 }
 
-
-
 /* Register Starts */
 
 .nav-ul li {
@@ -86,15 +84,34 @@ h1 {
 
 /* Register Ends */
 
-
 /* Form Validation */
 
-
-.input-invallid{
+.input-invallid {
   color: red;
   margin-top: -20px;
   margin-left: 20px;
   display: block;
+}
 
+/* Product List */
 
+.product-list {
+  text-align: center;
+  margin-top: 50px;
+  scroll-behavior: smooth;
+}
+
+.product-list ul li {
+  display: inline-block;
+  border: 1px solid skyblue;
+  padding: 5px;
+  width: 150px;
+  color: black;
+  font-size: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+.product-list ul {
+  margin: 0;
 }

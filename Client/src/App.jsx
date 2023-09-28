@@ -7,24 +7,24 @@ import PrivateComponent from "./Components/PrivateComponent";
 import Login from "./pages/Login";
 
 import AddProduct from "./pages/AddProduct";
+import ProductList from "./pages/ProductList";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+
+
 
 function App() {
   return (
     <div className="app">
       <BrowserRouter>
         <Navbar />
-        {/* <h1>E-Commerce Dashboard</h1> */}
 
         <Routes>
           <Route element={<PrivateComponent />}>
-            <Route path="/" element={<h1>Products Listing Components</h1>} />
-            <Route
-              path="/addproducs"
-              element={<AddProduct/>}
-            />
+            <Route path="/" element={<ProductList/>} />
+            <Route path="/addproducs" element={<AddProduct />} />
             <Route
               path="/updateproducts"
               element={<h1>Update Products Components</h1>}
@@ -38,7 +38,7 @@ function App() {
         </Routes>
         <ToastContainer />
       </BrowserRouter>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -22,7 +22,7 @@ function AddProduct() {
     // const user_id = JSON.parse(localStorage.getItem("usersdata"))._id                                  //getting the user_id from localstorage
     // console.log(user_id)
 
-    const product = await fetch("http://localhost:5002/addproducts", {
+    const product = await fetch("http://localhost:5002/add-Product", {
       method: "post",
       body: JSON.stringify({ title, price, category, company }),
       headers: {
