@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 
+import { toast } from "react-toastify";
+
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +15,7 @@ const SignUp = () => {
     if (isAuth) {
       navigate("/");
     }
-  },[]);
+  }, []);
 
   const HandleCollectData = async () => {
     console.log(name, email, password);
@@ -28,7 +30,9 @@ const SignUp = () => {
 
     //saving data into local storage
     localStorage.setItem("usersdata", JSON.stringify(userdata));
-
+    toast.success("Successfully Registered!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     navigate("/");
     return userdata;
   };

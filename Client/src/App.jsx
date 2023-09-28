@@ -6,12 +6,17 @@ import SignUp from "./Components/Signup";
 import PrivateComponent from "./Components/PrivateComponent";
 import Login from "./pages/Login";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
+ 
   return (
     <div className="app">
       <BrowserRouter>
         <Navbar />
         {/* <h1>E-Commerce Dashboard</h1> */}
+        
 
         <Routes>
           <Route element={<PrivateComponent />}>
@@ -31,6 +36,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
       <Footer />
     </div>

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "../Components/Navbar.css";
 import { useNavigate } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -31,10 +33,14 @@ function Login() {
 
     if (data.name) {
       localStorage.setItem("usersdata", JSON.stringify(data));
-      alert("Successfully logged in");
+      toast.success("Successfully logged in", {
+        postion: toast.POSITION.TOP_CENTER,
+      });
       navigate("/");
     } else {
-      alert("Wrong email or password");
+      toast.error("Wrong email or password", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 

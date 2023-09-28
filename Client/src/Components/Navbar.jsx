@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   //if user login or there is usersdata in localstorage then hide the signUp pages
@@ -8,6 +9,9 @@ const Navbar = () => {
 
   const Logout = () => {
     localStorage.clear();
+    toast.warning("Your are logged out !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     navigate("/signup");
   };
 
