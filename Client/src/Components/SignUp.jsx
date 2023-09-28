@@ -42,7 +42,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="register">
+    <div className="main">
       <h1>Register</h1>
       <input
         className="input-box"

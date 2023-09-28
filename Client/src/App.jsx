@@ -6,6 +6,8 @@ import SignUp from "./Components/Signup";
 import PrivateComponent from "./Components/PrivateComponent";
 import Login from "./pages/Login";
 
+import AddProduct from "./pages/AddProduct";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,7 +23,7 @@ function App() {
             <Route path="/" element={<h1>Products Listing Components</h1>} />
             <Route
               path="/addproducs"
-              element={<h1>Add Products Components</h1>}
+              element={<AddProduct/>}
             />
             <Route
               path="/updateproducts"

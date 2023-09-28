@@ -45,7 +45,7 @@ function Login() {
   };
 
   return (
-    <div className="register">
+    <div className="main">
       <h1>Login</h1>
       <input
         className="input-box"
