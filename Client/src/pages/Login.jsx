@@ -8,6 +8,8 @@ function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const [error, setError] = useState(false);
+
   const navigate = useNavigate();
 
   // this is for removing login button
@@ -19,6 +21,11 @@ function Login() {
   }, []);
 
   const HandleLogin = async () => {
+    if (!email || !password) {
+      setError(true);
+      return false;
+    }
+
     const result = await fetch("http://localhost:5002/api/login", {
       method: "post",
       body: JSON.stringify({ email, password }),
@@ -68,6 +75,9 @@ function Login() {
         }}
         placeholder="Enter Email"
       />
+      {error && !email && (
+        <span className="input-invallid">Enter valid email</span>
+      )}
       <input
         className="input-box"
         type="password"
@@ -77,6 +87,10 @@ function Login() {
         }}
         placeholder="Enter Password"
       />
+      {error && !password && (
+        <span className="input-invallid">Enter valid password</span>
+      )}
+
       <button onClick={HandleLogin} className="btn" type="button">
         Login
       </button>
