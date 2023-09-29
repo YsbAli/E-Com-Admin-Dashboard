@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,21 @@ const ProductList = () => {
     setProducts(allproducts);
   };
 
-  console.log(products);
+  // console.log(products);
+
+  const DeleteProduct = async (id) => {
+    const item = await fetch(`http://localhost:5002/product/${id}`, {
+      method: "delete",
+    });
+    const result = await item.json();
+    toast.success("Product Deleted !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    if (result) {
+      GetAllProducts();
+    }
+  };
+
   return (
     <>
       <div className="product-list">
@@ -24,6 +39,7 @@ const ProductList = () => {
           <li>Price</li>
           <li>Category</li>
           <li>Company</li>
+          <li>Operations</li>
         </ul>
         {products.map((item, i) => (
           <ul key={i}>
@@ -32,27 +48,13 @@ const ProductList = () => {
             <li>{item.price}</li>
             <li>{item.category}</li>
             <li>{item.company}</li>
+            <li>
+              <button onClick={() => DeleteProduct(item._id)} className="">
+                Delete
+              </button>
+            </li>
           </ul>
         ))}
-
-        {/* <table  className="product-list">
-        <tr>
-          <th>S. No</th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Catetory</th>
-          <th>Company</th>
-        </tr>
-        {products.map((item, i) => (
-          <tr key={i}>
-            <td>{i + 1}</td>
-            <td>{item.title}</td>
-            <td>{item.price}</td>
-            <td>{item.category}</td>
-            <td>{item.company}</td>
-          </tr>
-        ))}
-      </table> */}
       </div>
     </>
   );

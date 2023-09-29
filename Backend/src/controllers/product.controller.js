@@ -43,7 +43,7 @@ router.post('/add-Product', async (req, resp) => {
     }
 })
 
-router.patch("/:id", async (req, resp) => {
+router.patch("/product/:id", async (req, resp) => {
     try {
         const product = await Product.findByIdAndUpdate(req.params.id)
         return resp.send(product)
@@ -55,7 +55,7 @@ router.patch("/:id", async (req, resp) => {
 })
 
 
-router.delete("/:id", async (req, resp) => {
+router.delete("/product/:id", async (req, resp) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id)
         return resp.send(product)
