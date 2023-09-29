@@ -14,7 +14,7 @@ app.use(express.json())
 
 
 
-//get all p api
+//Get all Prodcuts API
 router.get("/products", async (req, resp) => {
     try {
         const product = await Product.find().lean().exec()
@@ -34,8 +34,7 @@ router.get("/products", async (req, resp) => {
 
 
 
-// get one p api
-
+// Get One Product API
 router.get("/products/:id", async (req, resp) => {
     try {
         const product = await Product.findById(req.params.id)
@@ -49,9 +48,27 @@ router.get("/products/:id", async (req, resp) => {
 
 
 
-// router.patch("/:id", CrudController(Product).Update)
-// router.delete("/:id", CrudController(Product).Delete)
+// Search API
 
+router.get("/search/:key", async (req, resp) => {
+    try {
+        const product = await Product.find({
+            "$or": [
+                { title: { $regex: req.params.key } },
+                { price: { $regex: req.params.key } },
+                { category: { $regex: req.params.key } },
+                { company: { $regex: req.params.key } },
+            ]
+        })
+        product ? resp.send(product) : resp.send("No result Found !")
+    }
+    catch (err) {
+        return resp.status(500).send({ Message: err.message })
+    }
+})
+
+
+//POST API
 router.post('/add-product', async (req, resp) => {
     try {
         const product = await Product.create(req.body)
@@ -61,6 +78,8 @@ router.post('/add-product', async (req, resp) => {
     }
 })
 
+
+// PATCH API
 router.patch("/update-product/:id", async (req, resp) => {
     try {
         const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
