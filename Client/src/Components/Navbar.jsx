@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const Logout = () => {
-    confirm("Are you sure?")
+    confirm("Are you sure?");
     localStorage.clear();
     toast.warning("Your are logged out !", {
       position: toast.POSITION.TOP_CENTER,
@@ -31,10 +31,10 @@ const Navbar = () => {
             <Link to="/">Products</Link>{" "}
           </li>
           <li>
-            <Link to="/addproducs">Add Products</Link>
+            <Link to="/add-products">Add Products</Link>
           </li>
           <li>
-            <Link to="/updateproducts">Update Products</Link>
+            <Link to="/update-products">Update Products</Link>
           </li>
           <li>
             <Link to="/profile">Profile</Link>

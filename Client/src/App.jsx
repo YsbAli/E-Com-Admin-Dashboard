@@ -11,9 +11,7 @@ import ProductList from "./pages/ProductList";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
-
+import UpdateProduct from "./pages/Update";
 
 function App() {
   return (
@@ -23,12 +21,9 @@ function App() {
 
         <Routes>
           <Route element={<PrivateComponent />}>
-            <Route path="/" element={<ProductList/>} />
-            <Route path="/addproducs" element={<AddProduct />} />
-            <Route
-              path="/updateproducts"
-              element={<h1>Update Products Components</h1>}
-            />
+            <Route path="/" element={<ProductList />} />
+            <Route path="/add-products" element={<AddProduct />} />
+            <Route path="/update-products" element={<UpdateProduct />} />
             <Route path="/logout" element={<h1>Logout Components</h1>} />
             <Route path="/profile" element={<h1>Profile Components</h1>} />
           </Route>
