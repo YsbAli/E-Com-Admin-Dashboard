@@ -6,33 +6,11 @@ function UpdateProduct() {
   const [price, setPrice] = useState();
   const [category, setCategory] = useState();
   const [company, setComapy] = useState();
-
   const [error, setError] = useState(false);
-  //
+
   const UpdateProduct = async (e) => {
     e.preventDefault();
-    if (!title || !price || !category || !company) {
-      setError(true);
-      return false;
-    }
-
-    const product = await fetch("http://localhost:5002/add-Product", {
-      method: "post",
-      body: JSON.stringify({ title, price, category, company }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const productdata = await product.json();
-    console.log(productdata);
-
-    toast.success("Product Added...", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-    setTitle("");
-    setPrice("");
-    setCategory("");
-    setComapy("");
+    console.log({ title, price, category, company });
   };
 
   return (
