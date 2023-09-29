@@ -13,7 +13,7 @@ const ProductList = () => {
   const GetAllProducts = async () => {
     const data = await fetch("http://localhost:5002/api/products", {
       headers: {
-        authorization: JSON.parse(localStorage.getItem("AuthToken")),
+        authorization : JSON.parse(localStorage.getItem("AuthToken")),
       },
     });
     const allproducts = await data.json();

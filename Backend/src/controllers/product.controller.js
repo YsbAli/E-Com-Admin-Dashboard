@@ -7,9 +7,6 @@ const app = express()
 
 const Product = require("../models/product.model")
 
-const CrudController = require('./crud.controller')
-
-
 app.use(express.json())
 
 
