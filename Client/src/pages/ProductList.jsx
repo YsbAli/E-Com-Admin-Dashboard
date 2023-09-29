@@ -4,19 +4,18 @@ import { Link } from "react-router-dom";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     GetAllProducts();
   }, []);
 
+  //get all products
   const GetAllProducts = async () => {
     const data = await fetch("http://localhost:5002/api/products");
     const allproducts = await data.json();
     setProducts(allproducts);
   };
 
-  // console.log(products);
-
+  //delete products
   const DeleteProduct = async (id) => {
     const item = await fetch(`http://localhost:5002/api/delete-product/${id}`, {
       method: "delete",
@@ -30,10 +29,31 @@ const ProductList = () => {
     }
   };
 
+  //search product
+  const HandleSearch = async (e) => {
+    // console.log(e.target.value);
+    const key = e.target.value;
+    if (key) {
+      const search = await fetch(`http://localhost:5002/api/search/${key}`);
+      const searchdata = await search.json();
+      if (searchdata) {
+        setProducts(searchdata);
+      }
+    } else {
+      GetAllProducts();
+    }
+  };
+
   return (
     <>
       <div className="product-list">
         <h1>Product List</h1>
+        <input
+          type="text"
+          className="search-box"
+          placeholder="Search Product"
+          onChange={HandleSearch}
+        />
         <ul>
           <li>S No.</li>
           <li>Title</li>
@@ -42,23 +62,27 @@ const ProductList = () => {
           <li>Company</li>
           <li>Operations</li>
         </ul>
-        {products.map((item, i) => (
-          <ul key={i}>
-            <li>{i + 1}</li>
-            <li>{item.title}</li>
-            <li>{item.price}</li>
-            <li>{item.category}</li>
-            <li>{item.company}</li>
-            <li>
-              <button onClick={() => DeleteProduct(item._id)} className="">
-                Delete
-              </button>
-              <Link to={`/update-products/${item._id}`}>
-                <button>Update</button>
-              </Link>
-            </li>
-          </ul>
-        ))}
+        {products.length > 0 ? (
+          products.map((item, i) => (
+            <ul key={i}>
+              <li>{i + 1}</li>
+              <li>{item.title}</li>
+              <li>{item.price}</li>
+              <li>{item.category}</li>
+              <li>{item.company}</li>
+              <li>
+                <button onClick={() => DeleteProduct(item._id)} className="">
+                  Delete
+                </button>
+                <Link to={`/update-products/${item._id}`}>
+                  <button>Update</button>
+                </Link>
+              </li>
+            </ul>
+          ))
+        ) : (
+          <h1>No Result Found !</h1>
+        )}
       </div>
     </>
   );

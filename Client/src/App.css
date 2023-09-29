@@ -115,3 +115,13 @@ h1 {
 .product-list ul {
   margin: 0;
 }
+
+/* Search Product Box */
+
+.search-box {
+  width: 400px;
+  height: 40px;
+  margin: 20px;
+  padding-left: 20px;
+  border: 1px solid skyblue;
+}
