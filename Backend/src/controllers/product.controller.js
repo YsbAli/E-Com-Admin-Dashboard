@@ -13,6 +13,8 @@ const CrudController = require('./crud.controller')
 app.use(express.json())
 
 
+
+//get all p api
 router.get("/all-Products", async (req, resp) => {
     try {
         const product = await Product.find().lean().exec()
@@ -29,6 +31,21 @@ router.get("/all-Products", async (req, resp) => {
         return resp.status(500).send({ message: err.message })
     }
 })
+
+
+
+// get one p api
+
+router.get("/product/:id", async (req, resp) => {
+    try {
+        const product = await Product.findById(req.params.id)
+        product ? resp.send(product) : resp.send({ Message: "No Product Found !" })
+    }
+    catch (err) {
+        resp.status(500).send(err.message)
+    }
+})
+
 
 
 // router.patch("/:id", CrudController(Product).Update)
