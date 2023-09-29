@@ -15,7 +15,7 @@ app.use(express.json())
 
 
 //get all p api
-router.get("/all-Products", async (req, resp) => {
+router.get("/products", async (req, resp) => {
     try {
         const product = await Product.find().lean().exec()
         // return resp.send(product)
@@ -36,9 +36,10 @@ router.get("/all-Products", async (req, resp) => {
 
 // get one p api
 
-router.get("/product/:id", async (req, resp) => {
+router.get("/products/:id", async (req, resp) => {
     try {
         const product = await Product.findById(req.params.id)
+        // return resp.send(product)
         product ? resp.send(product) : resp.send({ Message: "No Product Found !" })
     }
     catch (err) {
@@ -51,7 +52,7 @@ router.get("/product/:id", async (req, resp) => {
 // router.patch("/:id", CrudController(Product).Update)
 // router.delete("/:id", CrudController(Product).Delete)
 
-router.post('/add-Product', async (req, resp) => {
+router.post('/add-product', async (req, resp) => {
     try {
         const product = await Product.create(req.body)
         return resp.send(product)
@@ -60,9 +61,9 @@ router.post('/add-Product', async (req, resp) => {
     }
 })
 
-router.patch("/product/:id", async (req, resp) => {
+router.patch("/update-product/:id", async (req, resp) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id)
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
         return resp.send(product)
     }
     catch (err) {
@@ -72,7 +73,7 @@ router.patch("/product/:id", async (req, resp) => {
 })
 
 
-router.delete("/product/:id", async (req, resp) => {
+router.delete("/delete-product/:id", async (req, resp) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id)
         return resp.send(product)

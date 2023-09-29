@@ -10,7 +10,7 @@ const ProductList = () => {
   }, []);
 
   const GetAllProducts = async () => {
-    const data = await fetch("http://localhost:5002/all-Products");
+    const data = await fetch("http://localhost:5002/api/products");
     const allproducts = await data.json();
     setProducts(allproducts);
   };
@@ -18,7 +18,7 @@ const ProductList = () => {
   // console.log(products);
 
   const DeleteProduct = async (id) => {
-    const item = await fetch(`http://localhost:5002/product/${id}`, {
+    const item = await fetch(`http://localhost:5002/api/delete-product/${id}`, {
       method: "delete",
     });
     const result = await item.json();

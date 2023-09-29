@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function UpdateProduct() {
@@ -10,6 +10,7 @@ function UpdateProduct() {
   const [error, setError] = useState(false);
 
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetProductDetails();
@@ -17,7 +18,7 @@ function UpdateProduct() {
 
   //getting the product details from api and prefill to the update form
   const GetProductDetails = async () => {
-    const data = await fetch(`http://localhost:5002/product/${params.id}`);
+    const data = await fetch(`http://localhost:5002/api/products/${params.id}`);
     const productdata = await data.json();
     setTitle(productdata.title);
     setPrice(productdata.price);
@@ -25,9 +26,20 @@ function UpdateProduct() {
     setCompany(productdata.company);
   };
 
-  const UpdateProduct = async (e) => {
-    e.preventDefault();
-    console.log({ title, price, category, company });
+  const UpdateProduct = async () => {
+    // console.log({ title, price, category, company });
+
+    const data = await fetch(`http://localhost:5002/api/update-product/${params.id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ title, price, category, company }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const updatedata = await data.json();
+    console.log(updatedata);
+    navigate("/");
   };
 
   return (

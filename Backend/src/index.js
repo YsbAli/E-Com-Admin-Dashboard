@@ -1,11 +1,11 @@
 const express = require("express")
 const connect = require("./configs/db")
 
-const cors = require('cors')                    // this is for cors issue
+const cors = require('cors')
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors())                          // this is for cors issue
 
 
 
@@ -16,7 +16,8 @@ const User = require("./models/user.model")
 
 app.use('/register', UserController)
 
-app.use('/', productController)
+app.use('/api', productController)
+
 
 // app.post("/login", async (req, resp) => {
 //     const user = await User.findOne(req.body).select("-password")              //select("- password") is for not show password
