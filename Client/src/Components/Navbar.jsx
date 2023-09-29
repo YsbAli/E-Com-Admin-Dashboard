@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   //if user login or there is usersdata in localstorage then hide the signUp pages
+
   const isAuth = localStorage.getItem("usersdata");
   const userName = JSON.parse(isAuth);
   const navigate = useNavigate();
@@ -33,9 +34,9 @@ const Navbar = () => {
           <li>
             <Link to="/add-products">Add Products</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/update-products/:id">Update Products</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/profile">Profile</Link>
           </li>

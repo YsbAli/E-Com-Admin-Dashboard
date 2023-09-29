@@ -19,20 +19,32 @@ function Login() {
   }, []);
 
   const HandleLogin = async () => {
-    console.log(email, password);
-
-    const result = await fetch("http://localhost:5002/login", {
+    const result = await fetch("http://localhost:5002/api/login", {
       method: "post",
       body: JSON.stringify({ email, password }),
       headers: {
         "Content-type": "application/json",
       },
     });
-    const data = await result.json();
-    console.log(data);
 
-    if (data.name) {
-      localStorage.setItem("usersdata", JSON.stringify(data));
+    const data = await result.json();
+    // console.log(data);
+
+    // if (data.name) {
+    //   localStorage.setItem("usersdata", JSON.stringify(data));
+    //   toast.success("Successfully logged in", {
+    //     postion: toast.POSITION.TOP_CENTER,
+    //   });
+    //   navigate("/");
+    // } else {
+    //   toast.error("Wrong email or password", {
+    //     position: toast.POSITION.TOP_CENTER,
+    //   });
+    // }
+
+    if (data.authToken) {
+      localStorage.setItem("usersdata", JSON.stringify(data.user));
+      localStorage.setItem("AuthToken", JSON.stringify(data.authToken));
       toast.success("Successfully logged in", {
         postion: toast.POSITION.TOP_CENTER,
       });

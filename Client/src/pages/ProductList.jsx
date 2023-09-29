@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     GetAllProducts();
   }, []);
 
   //get all products
   const GetAllProducts = async () => {
-    const data = await fetch("http://localhost:5002/api/products");
+    const data = await fetch("http://localhost:5002/api/products", {
+      headers: {
+        authorization: JSON.parse(localStorage.getItem("AuthToken")),
+      },
+    });
     const allproducts = await data.json();
     setProducts(allproducts);
   };
